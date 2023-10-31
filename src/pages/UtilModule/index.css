@@ -1,0 +1,53 @@
+.utilModuleClass {
+    margin: auto;
+    display: flex;
+}
+
+.utilModuleClass .userInput {
+    display: flex;
+}
+
+.utilModuleClass .moduleSelect {
+    width: 200px;
+    background: white;
+    padding: 4px;
+    display: inline-block;
+    vertical-align: top;
+    /* min-height: 500px;; */
+    margin-top: 20px;
+    margin-right: 8px;
+}
+
+.utilModuleClass .add {
+    margin: 9px 0;
+    cursor: pointer;
+    width: 15px;
+}
+
+.utilModuleClass .add:hover {
+    background: #CEE1FD;
+    color: white;
+}
+
+.utilModuleClass .result {
+    text-align: left;
+}
+
+.utilModuleClass .moduleSelect .selectItem {
+    cursor: pointer;
+    text-align: left;
+}
+
+.utilModuleClass .moduleSelect .selectedState {
+    background: #CEE1FD;
+    cursor: default;
+    text-align: left;
+}
+
+.ant-input, .ant-input-number-input, .ant-input-number, .ant-select-selector {
+    border-radius: inherit!important;
+}
+
+.ant-table-cell, .ant-table-container {
+    border-radius: 0!important;
+}

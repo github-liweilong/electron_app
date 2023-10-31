@@ -1,0 +1,30 @@
+.change_table_body .ant-table-tbody .ant-table-cell{
+    padding: 0px!important;
+}
+
+.change_table_body .ant-table-thead .ant-table-cell {
+    user-select: none;
+}
+
+.change_table_body .ant-table-tbody .ant-input-number {
+    border: none;
+}
+
+.change_table_body .addRow {
+    cursor: pointer;
+    margin: 5px;
+    padding: 4px;
+}
+.change_table_body .addRow:hover {
+    background: rgb(105, 105, 193);
+}
+
+.change_table_body .table {
+    max-width: calc(100% - 105px);
+    overflow: auto;
+    margin-right: 5px;
+}
+
+.change_table_body {
+    text-align: left;   
+}

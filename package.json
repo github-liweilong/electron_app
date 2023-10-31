@@ -1,0 +1,56 @@
+{
+  "name": "my-electron-react-app",
+  "version": "0.1.0",
+  "private": true,
+  "main": "main.js",
+  "homepage": ".",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "electron-start": "cross-env NODE_ENV=development electron .",
+    "package": "electron-packager . my-tool-app --platform=win32 --arch=x64 --overwrite --electron-version=11.1.1",
+    "package:win": "electron-packager . app --win --out ./appBox --arch=x64 --app-version 1.0.0 --icon=favicon.ico --overwrite --ignore=node_modules --ignore=src --ignore=public --ignore=appBoxMac",
+    "package:mac": "electron-packager . app --mas --out ./appBoxMac --platform=mas --arch=x64 --app-version 1.0.0 --icon=favicon.ico --overwrite --ignore=node_modules --ignore=src --ignore=public --ignore=appBox"
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "antd": "^5.7.0",
+    "cra-template": "1.2.0",
+    "echarts": "^5.4.3",
+    "echarts-for-react": "^3.0.2",
+    "echarts-gl": "^2.0.9",
+    "mathjs": "^11.8.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^0.2.4"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "electron": "^25.2.0",
+    "electron-builder": "^24.6.3",
+    "electron-packager": "^17.1.1"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

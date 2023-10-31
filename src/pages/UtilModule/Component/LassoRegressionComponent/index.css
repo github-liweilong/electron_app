@@ -1,0 +1,13 @@
+._inputNumber .label {
+    width: 100px;
+    display: inline-block;
+}
+
+._inputNumber .grid {
+    overflow: auto;
+}
+
+._inputNumber {
+    display: flex;
+    margin: 5px 0;
+}

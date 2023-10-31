@@ -1,0 +1,18 @@
+._polynomialRegressionComponent .label {
+    width: 100px;
+    display: inline-block;
+}
+
+._polynomialRegressionComponent .grid {
+    overflow: auto;
+}
+
+._polynomialRegressionComponent {
+    display: flex;
+}
+
+._polynomialRegressionComponent .add {
+    margin: 9px 0;
+    cursor: pointer;
+    width: 15px;
+}
