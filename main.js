@@ -1,23 +1,11 @@
-const { app, BrowserWindow, nativeImage, Menu, shell } = require("electron");
+const { app, BrowserWindow, nativeImage, Menu, shell, ipcMain } = require("electron");
 const url = require('url');
-const path = require('path');
+// const path = require('path');
+const path = require('node:path')
+const { SerialPort } = require('serialport');
 
 function menuFunc(win) {
     const template = [
-        // {
-        //     label: '文件',
-        //     submenu: [
-        //         {
-        //             label: '新建窗口',
-        //             click() {
-        //                 new BrowserWindow({
-        //                     width: 500,
-        //                     height: 500,
-        //                 });
-        //             }
-        //         }
-        //     ]
-        // },
         {
             label: '工具',
             submenu: [
@@ -41,6 +29,36 @@ function menuFunc(win) {
     Menu.setApplicationMenu(menu);
 }
 
+// 打开串口
+// Create a port
+const port = new SerialPort({
+    path: 'COM2',
+    baudRate: 57600,
+})
+// port.open(() => {
+//     port.write('main screen turn on')
+// });
+
+const port2 = new SerialPort({
+    path: 'COM1',
+    baudRate: 57600,
+})
+// port2.open(() => {
+//     port2.on("data", (data) => {
+//         console.log(data.toString(), '==========xxx===================');
+//     });
+// });
+
+// SerialPort.list().then(
+//     ports => { console.log(ports); ports.forEach((ele) => { console.log(ele) }) },
+//     err => console.log(err)
+// )
+
+
+function handleFileOpen(event, xx) {
+    event.sender.send('message-from-main', 'xxxxxxxxxxxxxxxxxxxxxxx');
+}
+
 function createWindow() {
     let mainWindow = new BrowserWindow({
         width: 1000, // 窗口宽度
@@ -49,12 +67,48 @@ function createWindow() {
         icon: nativeImage.createFromPath('src/public/favicon.ico'), // "string" || nativeImage.createFromPath('src/image/icons/256x256.ico')从位于 path 的文件创建新的 NativeImage 实例
         webPreferences: { // 网页功能设置
             preload: path.join(__dirname, 'preload.js'),
+            // 关闭上下文隔离
+            contextIsolation: true,
+            nodeIntegration: true,
             // nodeIntegration: true, // 是否启用node集成 渲染进程的内容有访问node的能力
-            webviewTag: true, // 是否使用<webview>标签 在一个独立的 frame 和进程里显示外部 web 内容
-            webSecurity: false, // 禁用同源策略
-            nodeIntegrationInSubFrames: true // 是否允许在子页面(iframe)或子窗口(child window)中集成Node.js
+            // webviewTag: true, // 是否使用<webview>标签 在一个独立的 frame 和进程里显示外部 web 内容
+            // webSecurity: false, // 禁用同源策略
+            // nodeIntegrationInSubFrames: true // 是否允许在子页面(iframe)或子窗口(child window)中集成Node.js
         }
     });
+
+    ipcMain.on('set-title', (event, title) => {
+        // const port = new SerialPort({
+        //     path: 'COM2',
+        //     baudRate: 57600,
+        // })
+        port.open(() => {
+            port.write('main screen turn on-----' + title);
+        });
+
+        // SerialPort.list().then(
+        //     ports => { 
+        //         console.log(ports);
+        //         event.sender.send('message-from-main', ports);
+
+        //         ports.forEach((ele) => { console.log(ele) })
+        //     },
+        //     err => console.log(err)
+        // )
+    })
+
+    ipcMain.on('openPort', (event, data) => {
+        // const port2 = new SerialPort({
+        //     path: 'COM1',
+        //     baudRate: 57600,
+        // })
+        port2.open(() => {
+            port2.on("data", (data) => {
+                console.log(data, '======data')
+                event.sender.send('message-from-main', data);
+            });
+        });
+    })
 
     const isDev = process.env.NODE_ENV === 'development';
     if (isDev) {
